@@ -21,6 +21,7 @@ body {
 #app {
   height: 100%;
   width: 100%;
+  background-color: rgb(3, 0, 31);
 }
 
 @media (prefers-color-scheme: light) {

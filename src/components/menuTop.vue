@@ -13,18 +13,18 @@
       @select="handleSelect"
     >
       <el-menu-item index="0">
-      <!-- <img
-        style="width: 100px"
-        src="/images/element-plus-logo.svg"
-        alt="Element logo"
-      /> -->
+      <img
+        class="logo"
+        src="@/assets/jojologo.png"
+        alt="logo"
+      />
       <span class="titleL">Clone</span>
       <span class="titleR">AI</span>
       </el-menu-item>
       <el-menu-item index="1">首页</el-menu-item>
       <el-menu-item index="2">数字人</el-menu-item>
       <el-menu-item index="3">交互数字人</el-menu-item>
-      <el-sub-menu index="4">
+      <el-sub-menu index="4" popper-class="subMenu">
         <template #title>关于我们</template>
         <el-menu-item index="2-1">关于我们</el-menu-item>
         <el-menu-item index="2-2">关于 Chat AI</el-menu-item>
@@ -46,11 +46,11 @@
       :style="{display: isCollapse ? 'none' : ''}"
     >
       <el-menu-item index="0">
-      <!-- <img
-        style="width: 100px"
-        src="/images/element-plus-logo.svg"
-        alt="Element logo"
-      /> -->
+      <img
+        class="logo"
+        src="@/assets/jojologo.png"
+        alt="logo"
+      />
       <span class="titleL">Clone</span>
       <span class="titleR">AI</span>
       </el-menu-item>
@@ -65,10 +65,9 @@
         <el-menu-item index="2-3">帮助中心</el-menu-item>
       </el-sub-menu>
     </el-menu>
-
-       
-   <div class="openBtn" v-if="isMobile && isCollapse" @click="openMenu">展开</div>
-
+    <el-icon :size="20" color="#ffffff" class="openBtn" v-if="isMobile && isCollapse" @click="openMenu">
+      <Expand />
+    </el-icon>
     <div class="flex-grow" />
 
     <div class="menu-right">
@@ -82,6 +81,8 @@
 
 <script setup>
 import {ref, onMounted, onUnmounted,defineExpose} from 'vue'
+import {Expand} from '@element-plus/icons-vue'
+
 const activeIndex = ref('1')
 
 const isMobile = ref(window.innerWidth < 760)
@@ -92,11 +93,9 @@ const handleSelect = (key, keyPath) => {
   console.log(key, keyPath)
 }
 const openMenu = () => {
-  console.log('openMenu');
   isCollapse.value = false;
 }
 const closeMenu = () => {
-  console.log('close!!');
   isCollapse.value = true;
 }
 
@@ -128,22 +127,38 @@ defineExpose({closeMenu})
   .el-menu {
     height: 48px;
     border: none;
+    .el-menu-item.is-active {
+      border-bottom: 2px solid #0695cd ;
+    }
+    .subMenu {
+      border: none !important;
+      .el-menu-item {
+        // color: #0695cd;
+      }
+    }
   }
   .flex-grow {
     flex: 1;
   }
-  // .openBtn {
-  //   position: relative;
-  //   top: 10px;
-  //   left: 20px;
-  //   z-index: 99;
-  // }
+  .openBtn:hover {
+    color: #0695cd; /* 鼠标悬停时改变图标颜色为蓝色 */
+  }
+  .openBtn {
+    position: relative;
+    left: 14px;
+    z-index: 99;
+    cursor: pointer;
+  }
+}
+.logo {
+  width: 22px;
+  height: 22px;
+  margin-right: 10px;
 }
 .titleL {
   color: #fff;
   font-size: 20px;
   margin-right: 10px;
-  left: calc;
 }
 .titleR {
   color: #0695cd;
@@ -161,6 +176,7 @@ defineExpose({closeMenu})
     padding: 4px 16px ;
     border-radius: 24px;
     background-color: #14baba;
+    cursor: pointer;
   }
   .avatar {
     display: block;
@@ -171,6 +187,7 @@ defineExpose({closeMenu})
   }
   .account {
     margin-right: 10px;
+    cursor: pointer;
   }
 }
 .flex-grow {
@@ -186,11 +203,27 @@ defineExpose({closeMenu})
       top: 0;
       left: 0;
       overflow: hidden;
+      width: 160px;
+      padding: 6px;
+      color: #fefefeA6;
+      .el-menu-item {
+        height: 42px;
+      }
+      .el-menu-item:nth-child(1) {
+        padding-left: 0;
+      }
+      .el-menu-item.is-active {
+        border: none;
+        background-color: #0695cd;
+        border-radius: 4px;
+        color: #fff;
+      }
     }
     
   }
-  .el-menu-collapse {
-    // display: none;
-  }
+}
+
+.subMenu {
+  border: none !important;
 }
 </style>
