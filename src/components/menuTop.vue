@@ -1,5 +1,14 @@
 <template>
   <div class="menu">
+    <div v-if="!isMobile" @click="jump('/home')" class="logoBox">
+      <img
+        class="logo"
+        src="@/assets/jojologo.png"
+        alt="logo"
+      />
+      <span class="titleL">Clone</span>
+      <span class="titleR">AI</span>
+    </div>
     <!-- 大于760完全变成顶端菜单 小于760隐藏logo变成侧边菜单 小于325隐藏右边的信息 -->
     <el-menu
       v-if="!isMobile"
@@ -12,7 +21,7 @@
       :ellipsis="false"
       @select="handleSelect"
     >
-      <el-menu-item index="0">
+      <!-- <el-menu-item index="logo">
       <img
         class="logo"
         src="@/assets/jojologo.png"
@@ -20,19 +29,29 @@
       />
       <span class="titleL">Clone</span>
       <span class="titleR">AI</span>
-      </el-menu-item>
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">数字人</el-menu-item>
-      <el-menu-item index="3">交互数字人</el-menu-item>
-      <el-sub-menu index="4" popper-class="subMenu">
+      </el-menu-item> -->
+      <el-menu-item index="/home">首页</el-menu-item>
+      <el-menu-item index="/digital_man">数字人</el-menu-item>
+      <el-menu-item index="/interact">交互数字人</el-menu-item>
+      <el-sub-menu index="/about" popper-class="subMenu">
         <template #title>关于我们</template>
-        <el-menu-item index="2-1">关于我们</el-menu-item>
+        <el-menu-item index="/about">关于我们</el-menu-item>
         <el-menu-item index="2-2">关于 Chat AI</el-menu-item>
         <el-menu-item index="2-3">技术支持</el-menu-item>
         <el-menu-item index="2-3">帮助中心</el-menu-item>
       </el-sub-menu>
     </el-menu>
 
+
+    <div class="logoBox" v-if="isMobile && !isCollapse " @click="jump('/home')">
+      <img
+        class="logo"
+        src="@/assets/jojologo.png"
+        alt="logo"
+      />
+      <span class="titleL">Clone</span>
+      <span class="titleR">AI</span>
+    </div>
     <el-menu
       v-if="isMobile"
       :default-active="activeIndex"
@@ -45,7 +64,7 @@
       @select="handleSelect"
       :style="{display: isCollapse ? 'none' : ''}"
     >
-      <el-menu-item index="0">
+      <!-- <el-menu-item index="0">
       <img
         class="logo"
         src="@/assets/jojologo.png"
@@ -53,13 +72,13 @@
       />
       <span class="titleL">Clone</span>
       <span class="titleR">AI</span>
-      </el-menu-item>
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-menu-item index="2">数字人</el-menu-item>
-      <el-menu-item index="3">交互数字人</el-menu-item>
-      <el-sub-menu index="4">
+      </el-menu-item> -->
+      <el-menu-item index="/home">首页</el-menu-item>
+      <el-menu-item index="/digital_man">数字人</el-menu-item>
+      <el-menu-item index="/interact">交互数字人</el-menu-item>
+      <el-sub-menu index="/about" popper-class="subMenu">
         <template #title>关于我们</template>
-        <el-menu-item index="2-1">关于我们</el-menu-item>
+        <el-menu-item index="/about">关于我们</el-menu-item>
         <el-menu-item index="2-2">关于 Chat AI</el-menu-item>
         <el-menu-item index="2-3">技术支持</el-menu-item>
         <el-menu-item index="2-3">帮助中心</el-menu-item>
@@ -82,8 +101,10 @@
 <script setup>
 import {ref, onMounted, onUnmounted,defineExpose} from 'vue'
 import {Expand} from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 
-const activeIndex = ref('1')
+const router = useRouter()
+const activeIndex = ref('/home')
 
 const isMobile = ref(window.innerWidth < 760)
 const isCollapse = ref(window.innerWidth < 760);
@@ -91,6 +112,17 @@ const menuMode = ref('horizontal') //horizontal vertical
 
 const handleSelect = (key, keyPath) => {
   console.log(key, keyPath)
+  if(key == 'logo') {
+    activeIndex.value = '/home'
+    router.push('home')
+    return
+  }
+  activeIndex.value = key
+  router.push(key)
+}
+const jump = () => {
+  activeIndex.value = '/home'
+  router.push('home')
 }
 const openMenu = () => {
   isCollapse.value = false;
@@ -124,6 +156,26 @@ defineExpose({closeMenu})
   width: 100vw;
   height: 48px;
   background-color: #000000;
+  .logoBox {
+    padding-left:10px;
+    cursor: pointer;
+    .logo {
+      width: 22px;
+      height: 22px;
+      margin-right: 10px;
+    }
+    .titleL {
+      color: #fff;
+      font-size: 20px;
+      margin-right: 10px;
+    }
+    .titleR {
+      color: #0695cd;
+      font-size: 20px;
+      font-weight: 700;
+      margin-right: 24px;
+    }
+  }
   .el-menu {
     height: 48px;
     border: none;
@@ -150,22 +202,7 @@ defineExpose({closeMenu})
     cursor: pointer;
   }
 }
-.logo {
-  width: 22px;
-  height: 22px;
-  margin-right: 10px;
-}
-.titleL {
-  color: #fff;
-  font-size: 20px;
-  margin-right: 10px;
-}
-.titleR {
-  color: #0695cd;
-  font-size: 20px;
-  font-weight: 700;
-  margin-right: 24px;
-}
+
 .menu-right {
   color: #fff;
   display: flex;
@@ -186,7 +223,7 @@ defineExpose({closeMenu})
     margin-right: 6px;
   }
   .account {
-    margin-right: 10px;
+    margin-right: 30px;
     cursor: pointer;
   }
 }
@@ -197,6 +234,7 @@ defineExpose({closeMenu})
 @media screen and (max-width: 760px) {
   .menu {
     .el-menu {
+      margin-top: 48px;
       padding-left: 0;
       height: 100vh;
       position: fixed;
@@ -209,9 +247,9 @@ defineExpose({closeMenu})
       .el-menu-item {
         height: 42px;
       }
-      .el-menu-item:nth-child(1) {
-        padding-left: 0;
-      }
+      // .el-menu-item:nth-child(1) {
+      //   padding-left: 0;
+      // }
       .el-menu-item.is-active {
         border: none;
         background-color: #0695cd;
