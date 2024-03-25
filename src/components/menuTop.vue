@@ -16,7 +16,7 @@
       class="el-menu"
       mode="horizontal"
       background-color="#000000"
-      text-color="#fff"
+      text-color="#FEFEFEA6"
       active-text-color="#fff"
       :ellipsis="false"
       @select="handleSelect"
@@ -33,7 +33,7 @@
       <el-menu-item index="/home">首页</el-menu-item>
       <el-menu-item index="/digital_man">数字人</el-menu-item>
       <el-menu-item index="/interact">交互数字人</el-menu-item>
-      <el-sub-menu index="/about" popper-class="subMenu">
+      <el-sub-menu index="/about" popper-class="subMenu" style="border:none;">
         <template #title>关于我们</template>
         <el-menu-item index="/about">关于我们</el-menu-item>
         <el-menu-item index="2-2">关于 Chat AI</el-menu-item>
@@ -261,7 +261,15 @@ defineExpose({closeMenu})
   }
 }
 
+// 有二级菜单的标题及子菜单菜单字体颜色
+.el-menu--horizontal .el-menu .el-menu-item,
+.el-menu--horizontal .el-menu .el-sub-menu__title {
+	font-size: 12px !important;
+}
+.el-menu {
+  border: 0 !important;
+}
 .subMenu {
-  border: none !important;
+  background: #0695cd !important;
 }
 </style>

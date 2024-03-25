@@ -185,7 +185,7 @@ const carouselHeight = computed(() => {
     position: absolute;
     width: 80vw;
     left: 10vw;
-    bottom: 16vh;
+    bottom: 9vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,7 +193,7 @@ const carouselHeight = computed(() => {
     flex-wrap: wrap;
     .carouselBoxItem {
       background-color: #343439;
-      height: 90px;
+      height: 120px;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
