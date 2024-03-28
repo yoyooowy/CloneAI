@@ -22,6 +22,50 @@
           <br>
           2021 年小冰完成 A 轮融资，成长为 AI 行业最快的独角兽企业，并于 2022 年 11 月 7 日完成新一轮 10 亿元战略融资。在 AI 领域，小冰拥有计算机视觉、语音、NLP.人工智能创作等全栈核心 Al 能力，是业内布局数字员工最早的企业之一，目前 <span class="blue">已落地、可体验、产生业务价值</span> 的案例数也稳居第一。
         </p>
+
+        <div class="line"></div>
+
+        <div class="bag">
+          <div class="bagLi">
+            <div>AIGC工具包体验版</div>
+            <div>
+              <div class="discount">折扣价 <span class="num">¥399</span></div>
+              <div class="oldPrice">¥599</div>
+              <div class="center">包含内容</div>
+              <div class="list">
+                <div class="listLi">
+                  0元数字人形象定制(1个) <br>
+                  0元声音克隆(1个)<br>
+                  15分钟视频制作(有效期一个月)<br>
+                  15分钟音频(有效期一个月)<br>
+                  10000网站积分<br>
+                  数字人视频人工审核调优<br>
+                  9折高级定制折扣券<br>
+                  10%的分销折扣码<br>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bagLi">
+            <div>AIGC工具包体验版</div>
+            <div>
+              <div>折扣价¥399</div>
+              <div>¥599</div>
+              <div>包含内容</div>
+              <div class="list">
+                <div class="listLi">
+                  0元数字人形象定制(1个)
+                </div>
+                <div class="listLi">
+                  0元数字人形象定制(1个)
+                </div>
+                <div class="listLi">
+                  0元数字人形象定制(1个)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab2" v-show="activeTab == 1">
         <p>
@@ -67,7 +111,6 @@ const tabList = ref([
 
 const selectTab = (item)=> {
   activeTab.value = item.id
-  
 }
 
 const handleMouseEnter = (item) => {
@@ -77,7 +120,6 @@ const handleMouseEnter = (item) => {
     event.target.classList.add("active");
     event.target.classList.add("activeColor");
   }
-  
 };
 
 const handleMouseLeave = (item) => {
@@ -88,6 +130,7 @@ const handleMouseLeave = (item) => {
     event.target.classList.remove("activeColor");
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -141,9 +184,73 @@ const handleMouseLeave = (item) => {
   color: #fff;
   // font-size: 12px;
   line-height: 4vh;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox 支持 */
+  -ms-overflow-style: none; /* IE10+ 支持 */
+  /* Webkit 样式 */
+  &::-webkit-scrollbar {
+    display: none; /* 隐藏滚动条 */
+  }
+  .line {
+    border-bottom: 1px solid #585b64;
+  }
+  .bag {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    .bagLi {
+      width: 25%;
+      min-height: 400px;
+      color: #0695cd;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #0695cd;
+      border-radius: 10px;
+      .discount {
+        margin-top: 14px;
+        padding: 5px 10px;
+        border: 1px solid #cb9630;
+        white-space: nowrap;
+        border-radius: 4px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 20px;
+        color: #cb9630;
+        .num{
+          font-size: 28px;
+          font-weight: 700;
+        }
+      }
+      .oldPrice{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 24px;
+        font-weight: 700;
+        color: #585b64;
+        text-decoration: line-through;
+        text-align: center;
+      }
+      .list {
+        margin-top: 10px;
+        font-size: 10px;
+        text-align: left;
+      }
+    }
+    .activeLi {
+      background-color: #62c2c8;
+    }
+  }
 }
 
 .blue {
   color: #0695cd;
+}
+.center {
+  text-align: center;
 }
 </style>
