@@ -168,6 +168,7 @@ defineExpose({closeMenu})
       color: #fff;
       font-size: 20px;
       margin-right: 10px;
+      font-weight: 700;
     }
     .titleR {
       color: #0695cd;
